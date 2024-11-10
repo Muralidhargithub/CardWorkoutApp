@@ -22,9 +22,12 @@ class CardSelectionVC: UIViewController {
         super.viewDidLoad()
         starttimer()
         
-        for button in buttons{
-            button.layer.cornerRadius = 8
-        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        timer.invalidate()
     }
     
     func starttimer(){
