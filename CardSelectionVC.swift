@@ -1,4 +1,4 @@
-//
+ //
 //  CardSelectionVC.swift
 //  CardWorkoutApp
 //
@@ -8,22 +8,52 @@
 import UIKit
 
 class CardSelectionVC: UIViewController {
-
+    @IBOutlet var cardImagaView: UIImageView!
+    
+    //outlet collection
+    //drag circle to rest of the buttons to aply changs to that property
+    
+    @IBOutlet var buttons: [UIButton]!
+    var timer: Timer!
+    var cards:[UIImage] = Card.allValues
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        starttimer()
+        
+        for button in buttons{
+            button.layer.cornerRadius = 8
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func starttimer(){
+        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(showRandomImage), userInfo: nil, repeats: true)
     }
-    */
-
+    
+    
+    @objc func showRandomImage(){
+        
+        cardImagaView.image=cards.randomElement() ?? UIImage(named: "AS")
+    }
+    
+    @IBAction func stopButtonTapped(_ sender: UIButton) {
+        timer.invalidate()
+    }
+    
+    @IBAction func restartButtonTapped(_ sender: UIButton) {
+        timer.invalidate()
+        starttimer()
+    }
+    
+    @IBAction func rulesButtonTapped(_ sender: UIButton) {
+    }
+    
+    
 }
+    
+
+    
+    
+    
+
